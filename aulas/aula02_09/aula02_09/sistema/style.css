@@ -1,0 +1,107 @@
+:root {
+    --cor-bg: #2F1B6E;
+    --cor-primaria: #6F27F5;
+    --cor-secundaria: #D2BBFC;
+    --cor-texto: #ffffff;
+    --cor-erro: #ff4d4d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #333;
+    color: var(--cor-texto);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+main {
+    width: 100%;
+    min-height: 100vh;
+    padding: 4vh 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5vw;
+}
+
+#frmTema {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2vw;
+    width: 70%;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2vw;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+#frmTema select {
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    border: none;
+    width: 100%;
+    background: var(--cor-secundaria);
+    color: #2F1B6E;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#btnEnviar {
+    align-self: flex-end;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+#btnEnviar:hover {
+    background-color: #8756f7;
+}
+
+#frmQuiz {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.div_pergunta {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5vw;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 0.6rem;
+}
+
+.div_pergunta label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.msgErro {
+    color: var(--cor-erro);
+    font-weight: bold;
+}
+
+.msgSucesso {
+    color: var(--cor-secundaria);
+    font-weight: bold;
+}

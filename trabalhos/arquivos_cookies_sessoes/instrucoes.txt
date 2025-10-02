@@ -1,0 +1,36 @@
+Web2 - Trabalho 03 (Arquivos, Cookies e Sessões PHP)
+Para entrega a 6 de outubro de 2025 às 23:59
+Instruções
+Em dupla ou individualmente. 
+
+ 
+
+Crie um sistema de login composto pelas seguintes telas: 
+
+  
+
+Tela de Cadastro 
+Nessa tela, o usuário deve informar seu nome, e-mail e senha. Ao clicar no botão "Salvar", os dados devem ser registrados em um arquivo de texto. E um cookie é criado contendo o e-mail do usuário. Após o cadastro, o usuário deve ser redirecionado automaticamente para a tela de login, que deve ter o campo de e-mail preenchido automaticamente com o e-mail salvo no cookie. 
+
+
+
+Tela de Login 
+Nessa tela, o usuário deve preencher os campos de e-mail e senha. Se os dados informados corresponderem às informações armazenadas no arquivo de texto, uma sessão será criada, e o usuário será redirecionado para a Área do Usuário, onde seu nome e e-mail serão exibidos. 
+
+  
+
+Área do Usuário 
+Após o login bem-sucedido, o usuário é redirecionado para essa área, onde seu nome e e-mail são mostrados. 
+
+Nessa tela, deve haver um botão de Logout que permite ao usuário encerrar sua sessão. Ao clicar no botão, a sessão deve ser destruída e o usuário redirecionado para a tela de login. 
+
+-- Anotações
+
+- Se o usuário não existir no login, falar pra ele se cadastrar
+- Se achar o email e não bater a senha, falar que as credenciais estão erradas
+- Ter um atalho pra ir pra login
+- Ter um gerador de username??
+- Fazer uma função para verificar se existe o usuário no arquivo
+- funcao pra reescrever novos usuarios
+- salvar em algum canto se o cabeçalho (contador) já existe ou não
+- criar um contador de linhas do doc (-1 por causa do cabeçalho), onde o novo user vai ser baseado em "username+numcontador", assim eu tenho ideia de quantos usuários totais eu tenho

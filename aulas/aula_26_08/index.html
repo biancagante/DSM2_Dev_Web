@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet lovers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/12639/12639601.png" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="degrade"></div>
+    <main>
+        <form action="form.php" method="POST">
+            <div class="mb-3">
+                <label for="input_nome" class="form-label">Nome: </label>
+                <input type="text" class="form-control" name="input_nome" placeholder="Digite seu nome..." aria-describedby="nomeAviso">
+                <div id="nomeAviso" class="form-text">Coloque o seu nome, não o nome do pet!</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="servicos_pet" class="form-label">Serviços:</label>
+                <select class="form-select" name="opcoes_servicos">
+                    <option value="Banho simples (R$ 40)">Banho simples (R$ 40)</option>
+                    <option value="Tosa higiênica (R$ 50)">Tosa higiênica (R$ 50)</option>
+                    <option value="Banho + Tosa completa (R$ 80)">Banho + Tosa completa (R$ 80)</option>
+                    <option value="Tosa estilizada (R$ 110)">Tosa estilizada (R$ 110)</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Espécie:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especie" id="especie_gratuita" value="Cão, gato ou coelho" checked>
+                    <label class="form-check-label" for="especie_gratuita">Cão, gato ou coelho</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especie" id="especie_outra" value="Outra espécie (+R$ 10)">
+                    <label class="form-check-label" for="especie_outra">Outro (+R$ 10)</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Produtos:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Antipulgas e carrapaticidas (R$ 80)" name="ckextras[]" id="extra1">
+                    <label class="form-check-label" for="extra1">Antipulgas e carrapaticidas (R$ 80)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Shampoos e condicionadores específicos para pets (R$ 60)" name="ckextras[]" id="extra2">
+                    <label class="form-check-label" for="extra2">Shampoos e condicionadores específicos para pets (R$ 60)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Decoração com laços, gravatinhas ou penteados temáticos (R$ 15)" name="ckextras[]" id="extra3">
+                    <label class="form-check-label" for="extra3">Decoração com laços, gravatinhas ou penteados temáticos (R$ 15)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Petiscos para recompensa pós-banho (R$ 10)" name="ckextras[]" id="extra4">
+                    <label class="form-check-label" for="extra4">Petiscos para recompensa pós-banho (R$ 10)</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Concluir ficha</button>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+:root {
+    --cor-primaria: #9B7BFF;
+    --cor-secundaria: #351069;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    background-image: url('https://foxvet.com.br/wp-content/uploads/2022/07/banner-banho-tosa-perguntas-frequentes-1200x675.jpg');
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 0;
+    background-size: cover;
+    background-color: var(--cor-primaria);
+}
+
+.degrade {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #351069, #9c7bff56);
+    position: absolute;
+    opacity: 70%;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    left: 5%;
+}
+
+form {
+    background-color: white;
+    padding: 2.5vw;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control:focus, select:focus {
+    border-color: var(--cor-primaria) !important;
+    box-shadow: 0 0 0 .25rem rgba(157, 13, 253, 0.15) !important;
+}
+
+.mb-3 {
+    width: 100%;
+}
+
+label {
+    font-weight: 600;
+}
+
+input[type="radio"]:checked, input[type="radio"]:focus{
+    background-color: var(--cor-secundaria);
+    border-color: var(--cor-primaria) !important;
+    box-shadow: 0 0 0 .25rem rgba(157, 13, 253, 0.15) !important;
+}
+
+.form-check {
+    margin-bottom: .175rem!important;
+}
+
+.btn-primary {
+    background-color: var(--cor-primaria) !important;
+    font-weight: 600 !important;
+    border: solid 2px var(--cor-primaria)!important;
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-secundaria) !important;
+}
+
+.form-control:active{
+    background-color: #ebe4ff!important;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 .25rem rgba(157, 13, 253, 0.15) !important;
+    border-color: var(--cor-primaria);
+}
+
+/* Página PHP */
+
+.resumo-container {
+    max-width: 600px;
+    margin: 80px auto;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.resumo-titulo {
+    color: var(--cor-primaria);
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.resumo-servico p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.resumo-servico strong {
+    color: var(--cor-secundaria);
+}
+
+.resumo-extras ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.resumo-extras li {
+    margin-bottom: 0.3rem;
+}
+
+.preco-final {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--cor-secundaria);
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    main {
+        left: 0;
+        padding: 30px 20px;
+        justify-content: center;
+    }
+
+    form {
+        width: 100%;
+        max-width: 600px;
+        padding: 6vw;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .resumo-container {
+        width: 90%;
+        padding: 25px;
+        margin: 50px auto;
+    }
+
+    .resumo-titulo {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    form {
+        padding: 7vw;
+    }
+
+    .form-label,
+    .form-check-label {
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 10px 14px;
+    }
+
+    .resumo-titulo {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .resumo-servico p {
+        font-size: 0.95rem;
+    }
+
+    .preco-final {
+        font-size: 1.1rem;
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    form {
+        padding: 8vw 5vw;
+    }
+
+    .resumo-container {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .resumo-titulo {
+        font-size: 1.2rem;
+    }
+
+    .resumo-servico p,
+    .resumo-extras li {
+        font-size: 0.9rem;
+    }
+
+    .preco-final {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
