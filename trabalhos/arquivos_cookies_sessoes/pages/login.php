@@ -1,15 +1,26 @@
 <?php
+    require('../assets/funcoes.php');
+
     if (isset($_COOKIE["email"])) {
         $email = $_COOKIE["email"];
+    }
+    else {
+        $email = "";
     }
 
     if ($_SERVER['REQUEST_METHOD']==="POST") {
         if (isset($_POST["nome"]) && !empty($_POST["nome"])) {
             $nome = $_POST["nome"];
-            echo $nome;
+            $email = $_POST["email"];
+            $senha = $_POST["psw"];
+            echo "<span>" . verificarCredenciais($nome, $email, $senha) . "</span>";
+            session_start();
+            $_SESSION["nome"] = $_POST["nome"];
+            $_SESSION["email"] = $_POST["email"];
+            header('Location: userpage.php');
         }
         else {
-            echo "Algum campo não foi preenchido.";
+            echo "<span>" . "Algum campo não foi preenchido." . "</span>";
         }
     }
 ?>
@@ -19,9 +30,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entre</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
     <main>
@@ -35,7 +47,7 @@
             <label for="psw" class="form-label">Senha:
                 <input type="password" name="psw" placeholder="..." class="form-control" require>
             </label>
-            <button type="submit" class="btn btn-dark">Salvar</button>
+            <button type="submit" class="btn btn-dark">Entrar</button>
         </form>
     </main>
 </body>
