@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
 :root {
-    --primaria: blueviolet;
-    --secundaria: hotpink;
+    --primaria: #c407bd;
+    --secundaria: #ffe5ff;
+    --terciaria: #e8ff80;
     --branco: white;
+    --cinza: #748d9c;
+    --preto: #3d3d3d;
     --erro: red;
     --erro2: salmon;
     --sucesso: green;
@@ -9,16 +14,21 @@
 }
 
 body {
-    width: 100%;
-    background-color: var(--primaria);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--branco);
+    color: var(--preto);
 }
 
 main {
-    width: 100%;
-    height: 100vh;
+    width: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: -webkit-fill-available;
 }
 
 form {
@@ -31,13 +41,19 @@ form {
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+    color: var(--preto);
+}
+
 .mb-3 {
     display: flex;
     flex-direction: column;
 }
 
-span {
+.layout_msg {
     position: fixed;
+    bottom: 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -49,6 +65,143 @@ span {
     border: 0;
 }
 
-a {
-    color: var(--secundaria)
+.logo {
+    font-family: 'Gamja Flower', sans-serif;
+    margin: 0;
+    font-size: x-large;
+}
+
+nav {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10rem;
+    padding: .6rem 1.5rem;
+    border-radius: 32px;
+    border: 1px solid var(--cinza);
+    margin: 1.5rem auto;
+    background-color: var(--branco);
+    font-weight: 600;
+}
+
+.cta {
+    padding: .5rem .7rem;
+    color: var(--preto);
+}
+
+.cta:hover {
+    background-color: var(--primaria);
+    color: var(--branco);
+    border-radius: 20px;
+}
+
+.atalhos {
+    display: flex;
+    gap: 1vw;
+}
+
+.atalhos a:hover {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
+}
+
+.paginas {
+}
+
+.cta_mensagem {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.garota_meditando {
+    width: 400px;
+    margin: 2vw;
+}
+
+.btn_criar {
+    width: fit-content;
+}
+
+.overlay {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+}
+
+.projetos {
+    position: relative;
+    top: 300px;
+    left: 300px;
+    display: flex;
+    align-items: baseline;
+    transform: rotate(-45deg);
+}
+
+texto {
+    position: sticky;
+    background-color: var(--branco);
+    width: auto;
+    height: fit-content;
+    border: 1px solid var(--cinza);
+    padding: .6rem 1.2rem;
+    border-radius: 24px;
+    font-weight: 600;
+    transform: rotate(35deg);
+    margin-top: 6vw;
+    font-size: larger;
+}
+
+.seta_animada {
+    width: 70px;
+    transform: scaleX(-1);
+}
+
+#msg_retorno {
+    width: fit-content;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background-color: var(--sucesso2);
+    color: var(--sucesso);
+}
+
+.aviso {
+    width: fit-content;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background-color: #bebebe55;
+    color: var(--preto);
+}
+
+.grid_bg {
+    opacity: 5%;
+    position: fixed;
+    z-index: 0;
+    width: auto;
+    justify-self: anchor-center;
+    align-self: anchor-center;
+}
+
+.atalho_voltar {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.atalho_voltar i {
+    font-size: 24px;
+}
+
+.titulo {
+    font-size: larger;
+    margin: 1vw;
+}
+
+.entrar {
+    color: var(--primaria);
 }

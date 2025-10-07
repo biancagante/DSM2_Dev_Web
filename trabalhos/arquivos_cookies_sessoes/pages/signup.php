@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastre-se</title>
-    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=121409&format=png&color=000000" type="image/x-icon">
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=121409&format=png&color=000000"
+        type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -32,9 +33,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/style.css">
     <script src="../assets/script.js"></script>
 </head>
-
 <body>
+    <nav>
+        <a href="../index.html" class="atalho_voltar">
+            <i class="bi bi-arrow-left-short"></i>
+            <h2 class="logo">Day Zero</h2>
+        </a>
+        <div class="atalhos">
+            <a href="#">Produto</a>
+            <a href="#">Download</a>
+            <a href="#">Soluções</a>
+            <a href="#">Comunidade</a>
+        </div>
+        <div class="paginas">
+            <a href="login.php" class="cta">Entrar</a>
+            <a href="#" class="cta">Cadastrar-se</a>
+        </div>
+    </nav>
     <main>
+        <h2 class="titulo">Cadastre-se</h2>
         <form action="#" method="POST" class="mb-3">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:
@@ -51,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </label>
                 <button type="submit" class="btn btn-dark">Salvar</button>
             </div>
-            <a href="login.php">Entre na sua conta</a>
+            <a href="login.php" class="entrar">Entre na sua conta</a>
         </form>
     </main>
 </body>

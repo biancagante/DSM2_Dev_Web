@@ -1,12 +1,6 @@
 <?php
-    $contador = 0;
-    while ($contador < 1); {
-        $dados_cadastrais = fopen("dados.txt", "a");
-        fwrite($dados_cadastrais, "Username | E-mail | Password");
-        $contador++;
-    }
-    // setcookie("contador", $contador, time() + 86400);
-    // fclose($dados_cadastrais);
+    $dados_cadastrais = fopen("dados.txt", "a");
+    fclose($dados_cadastrais);
 
     function cadastrarUser($nome, $email, $senha) {
         $dados_cadastrais = fopen("dados.txt", "a");
@@ -18,7 +12,11 @@
         $dados_cadastrais = fopen("dados.txt", "r");
         while(($linha = fgets($dados_cadastrais)) != false) {
             $array_dados = explode(',', trim($linha));
-            if (in_array($email, $array_dados)) {
+            if (in_array($email, $array_dados) && in_array($senha, $array_dados)) {
+                session_start();
+                $_SESSION["nome"] = $_POST["nome"];
+                $_SESSION["email"] = $_POST["email"];
+                header('Location: userpage.php');
                 return "Acesso liberado";
             }
         }
