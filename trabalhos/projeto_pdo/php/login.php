@@ -14,8 +14,16 @@
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
 
-            header("Location: ../index.php");
-            exit;
+            
+            if ($usuario['nivel'] === 'admin') {
+                header("Location: dashboard.php");
+                exit;
+            }
+            
+            else {
+                header("Location: ../index.php");
+                exit;
+            }
         }
         else {
             echo "E-mail e/ou senha incorretos, tente novamente!";
@@ -36,6 +44,7 @@
     <script src="../assets/script.js"></script>
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center min-vh-100">
+    <a href="../index.php">Voltar</a>
     <div class="card p-4">
         <div class="card-body">
             <h4 class="card-title text-center mb-4">Login</h4>

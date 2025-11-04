@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -30,6 +30,9 @@
             else {
                 echo "Sem foto de perfil.";
             }
+
+            echo $usuario['nome'];
+            echo "<a href='logout.php'>Sair</a>";
         ?>
     </main>
 </body>

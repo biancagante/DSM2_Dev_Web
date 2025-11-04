@@ -3,17 +3,18 @@ require "php/config.php";
 
 session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
+if (isset($_SESSION['usuario_id'])) {
+    $query = $pdo->prepare('SELECT foto, email FROM usuario WHERE id = ?');
+    $query->execute([$_SESSION['usuario_id']]);
+    $usuario = $query->fetch();
+}
+
+else {
     echo "Sessão expirada";
 }
 
-$query = $pdo->prepare('SELECT foto, email FROM usuario WHERE id = ?');
-$query->execute([$_SESSION['usuario_id']]);
-$usuario = $query->fetch();
-
 $s_query = $pdo->query('SELECT foto, titulo, descricao FROM servico');
 $servico = $s_query->fetchAll(); 
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,6 +35,7 @@ $servico = $s_query->fetchAll();
             <nav class="latte-nav">
                 <ul class="latte-nav-links">
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
                     <li><a href="#cardapio">Cardápio</a></li>
                     <li><a href="#sobreNos">Sobre</a></li>
                     <li><a href="#gatinhos">Gatinhos</a></li>
@@ -42,18 +44,20 @@ $servico = $s_query->fetchAll();
             </nav>
             <div class="latte-actions">
                 <?php
-                if ($usuario) {
-                    echo "<span class='latte-user'>" . $usuario['email'] . "</span>";
+                    if (isset($_SESSION['usuario_id'])) {
+                        echo "<span class='latte-user'>" . $usuario['email'] . "</span>";
 
-                    if (!empty($usuario['foto'])) {
-                        echo "<img width='40px' class='rounded-circle latte-user-img' src='" . $usuario['foto'] . "'>";
+                        if (!empty($usuario['foto'])) {
+                            echo "<img width='40px' class='rounded-circle latte-user-img' src='" . $usuario['foto'] . "'>";
+                        } else {
+                            echo "<img width='40px' class='rounded-circle latte-user-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'>";
+                        }
+
+                        echo "<a href='php/logout.php'>Sair</a>";
                     } else {
-                        echo "<img width='40px' class='rounded-circle latte-user-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'>";
+                        echo "<a href='php/signup.php' class='latte-btn-signup'>Cadastro</a>";
+                        echo "<a href='php/login.php' class='latte-btn-login'>Login</a>";
                     }
-                } else {
-                    echo "<a href='php/signup.php' class='latte-btn-signup'>Cadastro</a>";
-                    echo "<a href='php/login.php' class='latte-btn-login'>Login</a>";
-                }
                 ?>
                 <button class="latte-menu-toggle" id="latte-menu-toggle"><i class="fas fa-bars"></i></button>
             </div>
@@ -95,7 +99,9 @@ $servico = $s_query->fetchAll();
                                             <h5 class='fw-bold mb-1'>" . $s['titulo'] . "</h5>
                                             <p class='mb-0'>" . $s['descricao'] . "</p>
                                             <div class='d-flex justify-content-end'>
+                                                <a href='php/review.php'>
                                                 <input type='submit' value='Saiba Mais'>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -370,8 +376,6 @@ $servico = $s_query->fetchAll();
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
-
-                <!-- Serviços -->
                 <div class="col-md-3">
                     <h6 class="fw-bold mb-3">Serviços</h6>
                     <ul class="footer-links">

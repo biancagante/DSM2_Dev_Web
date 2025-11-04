@@ -1,6 +1,7 @@
 <?php
     require "config.php";
-
+    
+    session_start();
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nome = $_POST['nome'];
         $email = $_POST['email'];
@@ -11,8 +12,8 @@
         if (!empty($nome) && isset($email) && isset($senha)) {
             $query = $pdo->prepare("INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?);");
             $query->execute([$nome, $email, $senha_hash]);
-            // session_start();
-            header("Location: ../index.php");
+
+            header("Location: login.php");
             exit;
         }
     }
@@ -31,6 +32,7 @@
     <script src="../assets/script.js"></script>
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center min-vh-100">
+    <a href="../index.php">Voltar</a>
     <div class="card p-4">
         <div class="card-body">
             <h4 class="card-title text-center mb-4">Cadastro</h4>

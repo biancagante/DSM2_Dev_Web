@@ -39,3 +39,8 @@ CREATE TABLE IF NOT EXISTS contato (
     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
  
+
+INSERT INTO servico (titulo, descricao, foto) VALUES 
+('Café & Terapia Felina', 'Sessões de relaxamento guiadas com a presença dos gatos. Ideal para aliviar o estresse, melhorar o humor e aproveitar o poder terapêutico do ronronar felino.', 'https://www.dailypaws.com/thmb/PeW3fJvhMo-z2XC-EZUTzG6XiCI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/petting-tabby-cat-964442088-2000-d63df49433564c60b6292494e5ed52d5.jpg');
+
+UPDATE usuario SET nivel = 'admin' WHERE email = 'adm@teste.com';
