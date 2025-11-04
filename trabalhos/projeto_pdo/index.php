@@ -11,14 +11,12 @@ $query = $pdo->prepare('SELECT foto, email FROM usuario WHERE id = ?');
 $query->execute([$_SESSION['usuario_id']]);
 $usuario = $query->fetch();
 
-$p_query = $pdo->prepare('SELECT foto, titulo, descricao FROM servico WHERE id = ?');
-$p_query->execute();
-$produto = $p_query->fetch(); 
+$s_query = $pdo->query('SELECT foto, titulo, descricao FROM servico');
+$servico = $s_query->fetchAll(); 
 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +26,6 @@ $produto = $p_query->fetch();
     <link rel="stylesheet" href="assets/style.css">
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/16796/16796125.png">
 </head>
-
 <body>
     <header class="latte-header">
         <div class="latte-container">
@@ -39,8 +36,8 @@ $produto = $p_query->fetch();
                     <li><a href="#home">Home</a></li>
                     <li><a href="#cardapio">Cardápio</a></li>
                     <li><a href="#sobreNos">Sobre</a></li>
-                    <li><a href="#">Gatinhos</a></li>
-                    <li><a href="#">Contato</a></li>
+                    <li><a href="#gatinhos">Gatinhos</a></li>
+                    <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
             <div class="latte-actions">
@@ -78,6 +75,36 @@ $produto = $p_query->fetch();
             <div class="cat-img">
                 <img src="https://png.pngtree.com/png-vector/20241012/ourmid/pngtree-cat-peeking-from-frame-png-image_14067902.png"
                     alt="">
+            </div>
+        </section>
+        <section id="servicos" class="py-5 bg-cream">
+            <div class="container">
+                <h2 class="fw-bold text-center mb-4" style="color:#4E372E;">Nossos Serviços</h2>
+                <p class="text-center mb-5" style="max-width:700px;margin:auto;color:#6b4b3a;">
+                    Uma experiência acolhedora pensada para quem ama café, tranquilidade e gatinhos 🐾☕
+                </p>
+                <div class="row g-4">
+                    <?php 
+                        foreach($servico as $s) {
+                            echo "<div class='col-md-6'>
+                                    <div class='service-card p-4 d-flex align-items-center gap-3'>
+                                        <div class='service-img'>
+                                            <img src='" . $s['foto'] . "' class='s-img'>
+                                        </div>
+                                        <div>
+                                            <h5 class='fw-bold mb-1'>" . $s['titulo'] . "</h5>
+                                            <p class='mb-0'>" . $s['descricao'] . "</p>
+                                            <div class='d-flex justify-content-end'>
+                                                <input type='submit' value='Saiba Mais'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ";
+                        }
+                        
+                    ?>
+                </div>
             </div>
         </section>
         <section id="cardapio" class="py-5">
@@ -266,31 +293,40 @@ $produto = $p_query->fetch();
                         </div>
                     </div>
                 </div>
-                <div class="cat-carousel mt-5">
+                <div class="cat-carousel mt-5" id="gatinhos">
                     <h3 class="fw-bold mb-3" style="color:#4E372E;">Gatinhos Residentes 🐾</h3>
-                    <div id="catsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div id="catsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
                         <div class="carousel-inner">
+
                             <div class="carousel-item active text-center">
-                                <img src="https://www.gatildosresgatados.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Fgato1.png&w=750&q=75" class="rounded-circle cat-img mb-2">
+                                <img src="https://www.gatildosresgatados.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Fgato1.png&w=750&q=75"
+                                    class="rounded-circle resident-img mb-2">
                                 <h5>Mia</h5>
                             </div>
+
                             <div class="carousel-item text-center">
-                                <img src="https://placekitten.com/301/250" class="rounded-circle cat-img mb-2">
+                                <img src="https://www.gatildosresgatados.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FIMG_8579.jpeg&w=640&q=75"
+                                    class="rounded-circle resident-img mb-2">
                                 <h5>Latte</h5>
                             </div>
+
                             <div class="carousel-item text-center">
-                                <img src="https://placekitten.com/302/250" class="rounded-circle cat-img mb-2">
+                                <img src="https://www.gatildosresgatados.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FIMG_3808.jpeg&w=640&q=75"
+                                    class="rounded-circle resident-img mb-2">
                                 <h5>Choco</h5>
                             </div>
+
                             <div class="carousel-item text-center">
-                                <img src="https://placekitten.com/303/250" class="rounded-circle cat-img mb-2">
+                                <img src="https://www.gatildosresgatados.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FIMG_8655.jpeg&w=640&q=75"
+                                    class="rounded-circle resident-img mb-2">
                                 <h5>Cookie</h5>
                             </div>
+
                         </div>
                     </div>
                 </div>
-            </section>
-        <section class="py-5">
+        </section>
+        <section class="py-5" id="contato">
             <div class="container">
                 <h2 class="section-title text-center">Entre em Contato</h2>
                 <form class="mx-auto" style="max-width: 600px;">
@@ -311,8 +347,52 @@ $produto = $p_query->fetch();
             </div>
         </section>
     </main>
-    <footer>
-        <p>Latte&Mia © 2025 | Feito com amor e patinhas 🐾</p>
+    <footer class="footer bg-dark text-light pt-5 pb-3 mt-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h4 class="fw-bold mb-3">Latte&Mia</h4>
+                    <p style="max-width: 260px;">
+                        O primeiro Cat Café encantador onde café, livros e ronronadas se encontram 🐾☕
+                    </p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="fw-bold mb-3">Menu</h6>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#cardapio">Cardápio</a></li>
+                        <li><a href="#sobreNos">Sobre</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+
+                <!-- Serviços -->
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Serviços</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Café Artesanal</a></li>
+                        <li><a href="#">Espaço de Leitura</a></li>
+                        <li><a href="#">Interação com Gatinhos</a></li>
+                        <li><a href="#">Eventos Temáticos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Contato</h6>
+                    <p class="small mb-1"><i class="bi bi-geo-alt-fill me-2"></i>Praia Grande, SP</p>
+                    <p class="small mb-1"><i class="bi bi-telephone-fill me-2"></i>(13) 99999-9999</p>
+                    <p class="small mb-1"><i class="bi bi-envelope-fill me-2"></i>contato@lattemia.com</p>
+                </div>
+            </div>
+            <hr class="border-light my-4">
+            <div class="text-center small">
+                Latte&Mia © 2025 | Feito com amor e patinhas 🐾
+            </div>
+        </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
