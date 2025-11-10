@@ -312,14 +312,14 @@
     background: var(--caramelo);
 }
 
-.bento-grid {
+.product-grid {
     display: grid;
     gap: 18px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 180px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-auto-rows: 200px;
 }
 
-.bento-item {
+.product-card {
     position: relative;
     overflow: hidden;
     border-radius: 16px;
@@ -328,34 +328,21 @@
     border: 2px solid #f0e1d2;
 }
 
-.bento-item img {
+.product-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: .4s ease;
 }
 
-.bento-item:hover {
+.product-card:hover {
     transform: scale(1.04);
     z-index: 10;
 }
 
-.bento-item:hover img {
+.product-card:hover img {
     transform: scale(1.15);
     filter: brightness(.85);
-}
-
-.bento-item.big {
-    grid-row: span 2;
-    grid-column: span 2;
-}
-
-.bento-item.tall {
-    grid-row: span 2 2;
-}
-
-.bento-item.wide {
-    grid-column: span 2;
 }
 
 .info {
@@ -372,38 +359,43 @@
     border-radius: 0 0 16px 16px;
 }
 
-.bento-item:hover .info {
+.product-card:hover .info {
     opacity: 1;
     transform: translateY(0);
 }
 
-.buy {
-    display: inline-block;
-    margin-top: 4px;
+.buy-box input[type='submit'] {
+    border: none;
+    background: #4E372E;
+    color: #fff;
     padding: 6px 14px;
     border-radius: 20px;
-    background: var(--marrom);
-    color: var(--creme);
     font-size: .85rem;
+    cursor: pointer;
     transition: .3s;
 }
 
-.buy:hover {
+.buy-box input[type='submit']:hover {
     background: #C4977B;
 }
 
-.buy-box {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #4E372E;
-    padding: 6px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: .3s ease;
-    overflow: hidden;
-    color: #fff;
+.product-card:nth-child(1) {
+    grid-column: span 2;
 }
+
+.product-card:nth-child(5) {
+    grid-column: span 2;
+    /* grid-row: span 2; */
+}
+
+.product-card:nth-child(7) {
+    grid-row: span 2;
+}
+
+.product-card:nth-child(9) {
+    grid-row: span 2;
+}
+
 
 i {
     color: var(--creme);
@@ -517,6 +509,402 @@ footer li a {
     color: var(--creme);
 }
 
+/* === Dashboard Estilo Geral === */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* === Container principal === */
+.dashboard-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* === Cabeçalho === */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.dashboard-header h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.btn-home, .btn-logout {
+    background: var(--marrom);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-logout {
+    background: #dc3545;
+}
+
+.btn-home:hover, .btn-logout:hover {
+    opacity: 0.8;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.user-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--rosa-chiclete);
+}
+
+.user-photo.placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+    font-size: 40px;
+    color: #777;
+}
+
+.user-info h2 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.user-info p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.dashboard-card i {
+    font-size: 40px;
+    color: var(--marrom);
+    margin-bottom: 12px;
+}
+
+.dashboard-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.btn-card {
+    background-color: var(--marrom);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-card:hover {
+    background: var(--caramelo);
+}
+
+.contatos-body {
+    background-color: #f8f9fa;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contatos-voltar {
+    text-decoration: none;
+    color: var(--marrom);
+    font-weight: 500;
+    margin: 20px 0;
+    align-self: flex-start;
+    margin-left: 40px;
+    transition: 0.3s;
+}
+
+.contatos-voltar:hover {
+    color: var(--caramelo);
+}
+
+.contatos-titulo {
+    margin: 10px 0 20px;
+    font-weight: 600;
+    color: #222;
+}
+
+.contatos-tabela {
+    width: 90%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+
+.contatos-header th {
+    background-color: var(--marrom);
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 14px 10px;
+    text-align: center;
+}
+
+.contatos-linha td {
+    padding: 14px 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.contatos-linha:hover {
+    background-color: #f1f7ff;
+}
+
+.contatos-linha:last-child td {
+    border-bottom: none;
+}
+
+.contatos-btn-excluir {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.contatos-btn-excluir:hover {
+    background-color: #b52a37;
+}
+
+.contatos-sem-msg {
+    font-style: italic;
+    color: #777;
+    text-align: center;
+    padding: 30px 0;
+}
+
+
+.usuarios-body {
+    background-color: #f8f9fa;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.usuarios-voltar {
+    text-decoration: none;
+    color: var(--marrom);
+    font-weight: 500;
+    margin: 20px 0;
+    align-self: flex-start;
+    margin-left: 40px;
+    transition: 0.3s;
+}
+
+.usuarios-voltar:hover {
+    color: var(--caramelo);
+}
+
+.usuarios-titulo {
+    margin: 10px 0 20px;
+    font-weight: 600;
+    color: #222;
+}
+
+.usuarios-tabela {
+    width: 90%;
+    max-width: 1100px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+
+.usuarios-header th {
+    background-color: var(--marrom);
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 14px 10px;
+    text-align: left;
+}
+
+.usuarios-linha td {
+    padding: 14px 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.usuarios-linha:hover {
+    background-color: #fdf6f0;
+}
+
+.usuarios-foto img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.usuarios-btn-novo,
+.usuarios-btn-editar,
+.usuarios-btn-excluir,
+.usuarios-btn-salvar,
+.usuarios-btn-cancelar {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.usuarios-btn-novo {
+    background-color: var(--marrom);
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.usuarios-btn-novo:hover {
+    background-color: var(--caramelo);
+}
+
+.usuarios-btn-editar {
+    background-color: var(--caramelo);
+    color: white;
+    margin-right: 6px;
+}
+
+.usuarios-btn-editar:hover {
+    background-color: var(--marrom);
+}
+
+.usuarios-btn-excluir {
+    background-color: #b73a3a;
+    color: #fff;
+}
+
+.usuarios-btn-excluir:hover {
+    background-color: #8b2828;
+}
+
+.usuarios-editar {
+    width: 90%;
+    max-width: 600px;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 50px;
+}
+
+.usuarios-editar-titulo {
+    color: var(--marrom);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.usuarios-editar-form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 500;
+    color: #333;
+}
+
+.usuarios-editar-form input[type="text"],
+.usuarios-editar-form input[type="email"],
+.usuarios-editar-form input[type="file"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+.usuarios-editar-botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.usuarios-btn-salvar {
+    background-color: var(--marrom);
+    color: #fff;
+}
+
+.usuarios-btn-salvar:hover {
+    background-color: var(--caramelo);
+}
+
+.usuarios-btn-cancelar {
+    background-color: #777;
+    color: #fff;
+}
+
+.usuarios-btn-cancelar:hover {
+    background-color: #999;
+}
+
+.form-editar {
+    background-color: var(--creme);
+    padding: 1vw;
+}
+
 @media (max-width: 992px) {
     .latte-nav-links {
         position: fixed;
@@ -540,21 +928,50 @@ footer li a {
     .latte-menu-toggle {
         display: block;
     }
-
+    
     .hero-img {
         width: 100%;
         max-width: 300px;
     }
-
-    .bento-grid {
+    
+    .product-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: 200px;
     }
-}
-
-@media(max-width: 576px) {
-    .bento-grid {
+    .product-grid {
         grid-template-columns: 1fr;
         grid-auto-rows: 200px;
+    }
+
+    .product-card:nth-child(1),
+    .product-card:nth-child(3),
+    .product-card:nth-child(5),
+    .product-card:nth-child(7) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contatos-tabela {
+        font-size: 14px;
+    }
+
+    .contatos-header th,
+    .contatos-linha td {
+        padding: 10px;
+    }
+
+    .contatos-voltar {
+        margin-left: 20px;
     }
 }

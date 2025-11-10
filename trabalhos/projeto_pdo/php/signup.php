@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/style.css">
     <script src="../assets/script.js"></script>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center min-vh-100">
     <a href="../index.php">Voltar</a>

@@ -1,20 +1,48 @@
 <?php
-require "php/config.php";
+require_once "php/config.php";
 
 session_start();
+$usuario = null;
+
+if (!isset($_COOKIE['visitante'])) {
+    setcookie('visitante', '1', time() + (30 * 24 * 60 * 60), '/');
+}
 
 if (isset($_SESSION['usuario_id'])) {
     $query = $pdo->prepare('SELECT foto, email FROM usuario WHERE id = ?');
     $query->execute([$_SESSION['usuario_id']]);
     $usuario = $query->fetch();
-}
 
+    if (!$usuario) {
+        session_destroy();
+        $usuario = null;
+    }
+} 
 else {
-    echo "Sessão expirada";
+    if (isset($_COOKIE['visitante'])) {
+        echo "Sessão expirada";
+    }
 }
 
-$s_query = $pdo->query('SELECT foto, titulo, descricao FROM servico');
-$servico = $s_query->fetchAll(); 
+$s_query = $pdo->query("SELECT foto, titulo, descricao FROM servico");
+$servico = $s_query->fetchAll();
+
+$p_query = $pdo->query("SELECT foto, nome, descricao, preco FROM produto");
+$produto = $p_query->fetchAll();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nome = trim($_POST['nome'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $mensagem = trim($_POST['mensagem'] ?? '');
+
+    if ($nome && $email && $mensagem) {
+        $contato = $pdo->prepare("INSERT INTO contato (nome, email, mensagem) VALUES (?, ?, ?)");
+        $contato->execute([$nome, $email, $mensagem]);
+        $mensagem_enviada = true;
+    } else {
+        $erro = "Preencha todos os campos antes de enviar.";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -116,148 +144,27 @@ $servico = $s_query->fetchAll();
         <section id="cardapio" class="py-5">
             <div class="container">
                 <h2 class="text-center mb-5 fw-bold" style="color: #4E372E">Cardápio</h2>
-                <div class="bento-grid">
-                    <div class="bento-item big">
-                        <img src="https://media.istockphoto.com/id/1134371245/pt/foto/cute-cat-face-latte-art-coffee-in-white-cup-on-wooden-table-love-coffee-cute-neko-latte-art.jpg?s=170667a&w=0&k=20&c=fN9w05B3kiy1TxfkSAigt41vr3w5lUwJkdzi-HOIaBo="
-                            alt="">
-                        <div class="info">
-                            <h4>Latte Mia</h4>
-                            <span>R$ 18,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
+                <div class="product-grid">
+                    <?php
+                    foreach ($produto as $p) {
+                        echo "
+                        <div class='product-card'>
+                            <img src='" . $p['foto'] . "' class='s-img' alt='" . $p['nome'] . "'>
+                            <div class='info'>
+                                <h5 class='fw-bold mb-1'>" . $p['nome'] . "</h5>
+                                <p class='mb-0'>" . $p['descricao'] . "</p>
+                                <p class='fw-bold mb-0'>R$ " . number_format($p['preco'], 2, ',', '.') . "</p>
+                                <div class='buy-box'>
+                                    <a href='php/checkout.php'>
+                                        <input type='submit' value='Adicionar ao Carrinho'>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="bento-item tall">
-                        <img src="https://images.ctfassets.net/qfxflpv0atz9/4UVsJWUnEMghn0VrlE4Ml5/5410bd2cfb4d6d1d5dd1841451da6f97/cappuccino-em-casa-destaque.jpg"
-                            alt="">
-                        <div class="info">
-                            <h4>Cappuccino Rose</h4>
-                            <span>R$ 22,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item">
-                        <img src="https://i.pinimg.com/564x/e7/25/9d/e7259d762e48c9b9f1dc30564581db05.jpg" alt="">
-                        <div class="info">
-                            <h4>Cookie Gatinho</h4>
-                            <span>R$ 9,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item wide">
-                        <img src="https://assets.unileversolutions.com/recipes-v2/237868.jpg" alt="">
-                        <div class="info">
-                            <h4>Mocha Felino</h4>
-                            <span>R$ 20,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item">
-                        <img src="https://recipesblob.oetker.com.br/assets/677216088b6540a0b110ca1d74479af6/1272x764/brownie-com-sorvete.webp"
-                            alt="">
-                        <div class="info">
-                            <h4>Brownie Mia</h4>
-                            <span>R$ 12,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item big">
-                        <img src="https://blog.finamac.com/wp-content/uploads/2019/10/309956-como-oferecer-os-melhores-sabores-de-milkshake-para-os-clientes.jpg"
-                            alt="">
-                        <div class="info">
-                            <h4>Frapê Caramel Cat</h4>
-                            <span>R$ 26,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item">
-                        <img src="https://docesemimosgourmet.com.br/wp-content/uploads/2019/09/IMG_7949_Easy-Resize.com_.jpg"
-                            alt="">
-                        <div class="info">
-                            <h4>Mini Tartlette</h4>
-                            <span>R$ 7,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item tall">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAq83mKxX81nHDhMixnJMKwLSQ729W63lPOQ&s"
-                            alt="">
-                        <div class="info">
-                            <h4>Espresso Mia</h4>
-                            <span>R$ 10,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item">
-                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&w=900&q=80">
-                        <div class="info">
-                            <h4>Cheesecake Berry Paws</h4>
-                            <span>R$ 16,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item wide">
-                        <img src="https://static01.nyt.com/images/2021/08/15/magazine/affogato/affogato-threeByTwoLargeAt2X-v2.jpg"
-                            alt="">
-                        <div class="info">
-                            <h4>Affogato Mia</h4>
-                            <span>R$ 22,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvMXFTHAi9EQEulLKSDGKabwisF8FMF6FzJg&s"
-                            alt="">
-                        <div class="info">
-                            <h4>Mousse Duo Gatinho</h4>
-                            <span>R$ 11,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bento-item">
-                        <img src="https://cdn.shopify.com/s/files/1/1456/8506/files/shutterstock_717825796_600x600.jpg?v=1717872256"
-                            alt="">
-                        <div class="info">
-                            <h4>Matcha Mia</h4>
-                            <span>R$ 19,00</span>
-                            <div class="buy-box">
-                                <i class="bi bi-bag"></i>
-                                <span class="buy-text">Comprar</span>
-                            </div>
-                        </div>
-                    </div>
+                        ";
+                    }
+                    ?>
+
                 </div>
             </div>
         </section>
@@ -335,20 +242,20 @@ $servico = $s_query->fetchAll();
         <section class="py-5" id="contato">
             <div class="container">
                 <h2 class="section-title text-center">Entre em Contato</h2>
-                <form class="mx-auto" style="max-width: 600px;">
+                <form action="#" method="POST" class="mx-auto" style="max-width: 600px;">
                     <div class="mb-3">
                         <label class="form-label">Seu nome</label>
-                        <input type="text" class="form-control" placeholder="Digite seu nome">
+                        <input name="nome" type="text" class="form-control" placeholder="Digite seu nome">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Seu e-mail</label>
-                        <input type="email" class="form-control" placeholder="Digite seu e-mail">
+                        <input name="email" type="email" class="form-control" placeholder="Digite seu e-mail">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Mensagem</label>
-                        <textarea rows="4" class="form-control" placeholder="Digite sua mensagem"></textarea>
+                        <textarea name="mensagem" rows="4" class="form-control" placeholder="Digite sua mensagem"></textarea>
                     </div>
-                    <button class="btn btn-dark w-100">Enviar</button>
+                    <input type="submit" value="Enviar" class="btn btn-dark w-100">
                 </form>
             </div>
         </section>
