@@ -65,10 +65,6 @@
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
-            $uploadDir = "uploads/";
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
 
             $fotoNome = basename($_FILES['foto']['name']);
             $caminhoFoto = $uploadDir . $fotoNome;

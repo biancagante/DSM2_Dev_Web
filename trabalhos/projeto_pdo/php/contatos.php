@@ -2,7 +2,6 @@
     require "config.php";
 
     $exibirContatos = $pdo->query("SELECT * FROM contato");
-    // $exibirContatos->execute();
     $exibirContatos = $exibirContatos->fetchAll();
 
     $contagemMensagens = $pdo->prepare("SELECT COUNT(id) FROM contato");

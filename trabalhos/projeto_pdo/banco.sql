@@ -2,13 +2,6 @@
 CREATE DATABASE IF NOT EXISTS sistema;
 USE sistema;
 
--- Tabela de avaliações
-CREATE TABLE IF NOT EXISTS avaliacao (
-  id int(11) NOT NULL,
-  nome varchar(100) NOT NULL,
-  estrelas int(11) NOT NULL,
-  comentario text NOT NULL
-);
 
 -- Tabela de usuários
 CREATE TABLE IF NOT EXISTS usuario (
@@ -30,6 +23,16 @@ CREATE TABLE IF NOT EXISTS servico (
     foto VARCHAR(255)
 );
 
+-- Tabela de avaliações
+CREATE TABLE IF NOT EXISTS avaliacao (
+  id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nome varchar(100) NOT NULL,
+  estrelas int(11) NOT NULL,
+  comentario text NOT NULL,
+  id_servico INT NOT NULL,
+  CONSTRAINT fk_servico FOREIGN KEY(id_servico) REFERENCES servico(id) 
+);
+
 CREATE TABLE IF NOT EXISTS produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -47,10 +50,6 @@ CREATE TABLE IF NOT EXISTS contato (
     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
  
-
--- INSERT INTO servico (titulo, descricao, foto) VALUES 
--- ('Café & Terapia Felina', 'Sessões de relaxamento guiadas com a presença dos gatos. Ideal para aliviar o estresse, melhorar o humor e aproveitar o poder terapêutico do ronronar felino.', 'https://www.dailypaws.com/thmb/PeW3fJvhMo-z2XC-EZUTzG6XiCI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/petting-tabby-cat-964442088-2000-d63df49433564c60b6292494e5ed52d5.jpg');
-
 INSERT INTO servico (titulo, descricao, foto) VALUES
 ('Café com Gatos', 'Desfrute de uma xícara de café ou chá enquanto interage com nossos gatos amigáveis em um ambiente acolhedor.', 'https://images.prismic.io/trustedhousesitters/73c75e56-9eaf-4eef-a7b2-2d782286c9a3_can+cats+have+coffee.jpg?auto=compress,format&rect=0,0,1920,800&w=1920&h=800'),
 ('Espaço de Leitura com Gatos', 'Relaxe em nosso espaço dedicado à leitura, cercado por gatos tranquilos, onde você pode ler seus livros favoritos enquanto os felinos se aconchegam ao seu lado, criando um ambiente sereno e acolhedor.', 'https://ca-times.brightspotcdn.com/dims4/default/08e12cc/2147483647/strip/true/crop/8192x5464+0+0/resize/2000x1334!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Faf%2Fb2%2F76e1d0054a948fcc01eb35650382%2F1519796-wk-cool-cat-collective-silent-reading-night-jey-03.jpg'),
@@ -73,5 +72,3 @@ INSERT INTO produto (nome, descricao, preco, foto) VALUES
 ('Affogato Mia', 'Sorvete de baunilha mergulhado em expresso quente, uma combinação irresistível.', 22.00, 'https://static01.nyt.com/images/2021/08/15/magazine/affogato/affogato-threeByTwoLargeAt2X-v2.jpg'),
 ('Mousse Duo Gatinho', 'Mousse bicolor de chocolate e baunilha com textura leve e aveludada.', 11.00, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvMXFTHAi9EQEulLKSDGKabwisF8FMF6FzJg&s'),
 ('Matcha Mia', 'Bebida cremosa à base de chá verde japonês com leite vaporizado.', 19.00, 'https://cdn.shopify.com/s/files/1/1456/8506/files/shutterstock_717825796_600x600.jpg?v=1717872256');
-
-UPDATE usuario SET foto = 'https://digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png' WHERE foto IS NULL OR foto = '';

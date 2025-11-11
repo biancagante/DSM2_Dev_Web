@@ -9,7 +9,7 @@ if (!isset($_COOKIE['visitante'])) {
 }
 
 if (isset($_SESSION['usuario_id'])) {
-    $query = $pdo->prepare('SELECT foto, email FROM usuario WHERE id = ?');
+    $query = $pdo->prepare('SELECT * FROM usuario WHERE id = ?');
     $query->execute([$_SESSION['usuario_id']]);
     $usuario = $query->fetch();
 
@@ -24,7 +24,7 @@ else {
     }
 }
 
-$s_query = $pdo->query("SELECT foto, titulo, descricao FROM servico");
+$s_query = $pdo->query("SELECT foto, titulo, descricao, id FROM servico");
 $servico = $s_query->fetchAll();
 
 $p_query = $pdo->query("SELECT foto, nome, descricao, preco FROM produto");
@@ -74,15 +74,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php
                     if (isset($_SESSION['usuario_id'])) {
                         echo "<span class='latte-user'>" . $usuario['email'] . "</span>";
-
-                        if (!empty($usuario['foto'])) {
-                            echo "<img width='40px' class='rounded-circle latte-user-img' src='" . $usuario['foto'] . "'>";
-                        } else {
-                            echo "<img width='40px' class='rounded-circle latte-user-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'>";
+                        if ($usuario['nivel'] === 'admin') {
+                            echo "<a href='php/dashboard.php'>Dashboard</a>";
                         }
-
+                        echo "<img width='40px' class='rounded-circle latte-user-img' src='" . $usuario['foto'] . "'>";
                         echo "<a href='php/logout.php'>Sair</a>";
-                    } else {
+                    } 
+                    else {
                         echo "<a href='php/signup.php' class='latte-btn-signup'>Cadastro</a>";
                         echo "<a href='php/login.php' class='latte-btn-login'>Login</a>";
                     }
@@ -127,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <h5 class='fw-bold mb-1'>" . $s['titulo'] . "</h5>
                                             <p class='mb-0'>" . $s['descricao'] . "</p>
                                             <div class='d-flex justify-content-end'>
-                                                <a href='php/review.php'>
+                                                <a href='php/avaliar.php?id={$s['id']}'>
                                                 <input type='submit' value='Saiba Mais'>
                                                 </a>
                                             </div>
@@ -136,7 +134,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             ";
                         }
-                        
                     ?>
                 </div>
             </div>

@@ -26,35 +26,6 @@
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/16796/16796125.png">
 </head>
 <body>
-    <!-- <main>
-        <a href="../index.php">Home</a>
-        <h1>Seus dados</h1>
-        <?php
-            if (!empty($usuario['foto'])) {
-                echo "<img src='{$usuario['foto']}'>";
-            } 
-            else {
-                echo "Sem foto de perfil.";
-            }
-
-            echo "<br>" . $usuario['nome'];
-            echo "<br><a href='logout.php'>Sair</a>";
-        ?>
-        <div>
-            <div>
-                <h2>Produtos</h2>
-                <a href="produtos.php">Acessar</a>
-            </div>
-            <div>
-                <h2>Contato</h2>
-                <a href="contatos.php">Acessar</a>
-            </div>
-            <div>
-                <h2>Usuários</h2>
-                <a href="usuarios.php">Acessar</a>
-            </div>
-        </div>
-    </main> -->
     <main class="dashboard-container">
         <header class="dashboard-header">
             <a href="../index.php" class="btn-home"><i class="bi bi-house-door"></i> Home</a>
@@ -80,20 +51,22 @@
                 </div>";
             ?>
         </section>
-
         <section class="cards-grid">
+            <div class="dashboard-card">
+                <i class="bi bi-box-seam"></i>
+                <h3>Avaliações</h3>
+                <a href='avaliacao.php' class='btn-card'>Acessar</a>
+            </div>
             <div class="dashboard-card">
                 <i class="bi bi-box-seam"></i>
                 <h3>Produtos</h3>
                 <a href='produtos.php' class='btn-card'>Acessar</a>
             </div>
-
             <div class="dashboard-card">
                 <i class="bi bi-chat-dots"></i>
                 <h3>Contato</h3>
                 <a href='contatos.php' class='btn-card'>Acessar</a>
             </div>
-
             <div class="dashboard-card">
                 <i class="bi bi-people"></i>
                 <h3>Usuários</h3>
